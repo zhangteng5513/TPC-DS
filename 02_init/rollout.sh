@@ -37,18 +37,18 @@ check_gucs()
 
 	get_version
 	if [[ "$VERSION" == "gpdb_4_3" || "$VERSION" == "gpdb_5" || "$VERSION" == "hawq_1" ]]; then
-		echo "check optimizer"
-		counter=$(psql -v ON_ERROR_STOP=ON -t -A -c "show optimizer" | grep -i "on" | wc -l; exit ${PIPESTATUS[0]})
+		#echo "check optimizer"
+		#counter=$(psql -v ON_ERROR_STOP=ON -t -A -c "show optimizer" | grep -i "on" | wc -l; exit ${PIPESTATUS[0]})
 
-		if [ "$counter" -eq "0" ]; then
-			echo "enabling optimizer"
-			if [ "$VERSION" == "hawq_2" ]; then
-				hawq config -c optimizer -v on
-			else
-				gpconfig -c optimizer -v on --masteronly
-			fi
-			update_config="1"
-		fi
+		#if [ "$counter" -eq "0" ]; then
+		#	echo "enabling optimizer"
+		#	if [ "$VERSION" == "hawq_2" ]; then
+		#		hawq config -c optimizer -v on
+		#	else
+		#		gpconfig -c optimizer -v on --masteronly
+		#	fi
+		#	update_config="1"
+		#fi
 
 		echo "check analyze_root_partition"
 		counter=$(psql -v ON_ERROR_STOP=ON -t -A -c "show optimizer_analyze_root_partition" | grep -i "on" | wc -l; exit ${PIPESTATUS[0]})
