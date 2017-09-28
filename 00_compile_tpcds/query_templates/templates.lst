@@ -7,6 +7,7 @@ query6.tpl
 query7.tpl
 query8.tpl
 query9.tpl
+query10.tpl
 query11.tpl
 query12.tpl
 query13.tpl
@@ -31,6 +32,7 @@ query31.tpl
 query32.tpl
 query33.tpl
 query34.tpl
+query35.tpl
 query36.tpl
 query37.tpl
 query38.tpl
@@ -72,8 +74,10 @@ query73.tpl
 query74.tpl
 query75.tpl
 query76.tpl
+query77.tpl
 query78.tpl
 query79.tpl
+query80.tpl
 query81.tpl
 query82.tpl
 query83.tpl
@@ -88,6 +92,7 @@ query91.tpl
 query92.tpl
 query93.tpl
 query94.tpl
+query95.tpl
 query96.tpl
 query97.tpl
 query98.tpl
