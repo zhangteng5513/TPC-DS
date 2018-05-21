@@ -72,7 +72,7 @@ gen_data()
 {
 	get_version
 	if [[ "$VERSION" == "gpdb_4_2" || "$VERSION" == "gpdb_4_3" || "$VERSION" == "gpdb_5" || "$VERSION" == "hawq_1" ]]; then
-		PARALLEL=16
+		PARALLEL=$(gpstate | grep "Total primary segments" | awk -F '=' '{print $2}')
 		echo "parallel: $PARALLEL"
 		for i in $(psql -A -t -c "SELECT row_number() over(), trim(hostname), trim(path) FROM public.data_dir"); do
 			CHILD=$(echo $i | awk -F '|' '{print $1}')
