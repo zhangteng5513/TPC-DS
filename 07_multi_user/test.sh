@@ -53,11 +53,14 @@ else
 
 		if [ "${AIPLAN}" != "no" ]; then
 			echo "set ai_planner=on;" > $sql_dir/$filename
+			#add explain analyze 
+			echo "echo \":EXPLAIN_ANALYZE\" >> $sql_dir/$filename"
+			echo ":EXPLAIN_ANALYZE" >> $sql_dir/$filename
+		else
+			#add explain analyze 
+			echo "echo \":EXPLAIN_ANALYZE\" > $sql_dir/$filename"
+			echo ":EXPLAIN_ANALYZE" > $sql_dir/$filename
 		fi
-
-		#add explain analyze 
-		echo "echo \":EXPLAIN_ANALYZE\" > $sql_dir/$filename"
-		echo ":EXPLAIN_ANALYZE" > $sql_dir/$filename
 
 		echo "sed -n \"$start_position\",\"$end_position\"p $sql_dir/$tpcds_query_name >> $sql_dir/$filename"
 		sed -n "$start_position","$end_position"p $sql_dir/$tpcds_query_name >> $sql_dir/$filename
