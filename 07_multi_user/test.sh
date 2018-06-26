@@ -9,6 +9,7 @@ GEN_DATA_SCALE=$1
 session_id=$2
 SQL_VERSION=$3
 EXPLAIN_ANALYZE=$4
+AIPLAN=${AIPLANNER:=no}
 
 if [[ "$GEN_DATA_SCALE" == "" || "$session_id" == "" || "$SQL_VERSION" == "" || "$EXPLAIN_ANALYZE" == "" ]]; then
 	echo "Error: you must provide the scale, the session id, and SQL_VERSION as parameters."
@@ -49,6 +50,10 @@ else
 		file_id=$(sed -n "$start_position","$start_position"p $sql_dir/$tpcds_query_name | awk -F ' ' '{print $4}')
 		file_id=$(($file_id+100))
 		filename=$file_id.query.$q.sql
+
+		if [ "${AIPLAN}" != "no" ]; then
+			echo "set ai_planner=on;" > $sql_dir/$filename
+		fi
 
 		#add explain analyze 
 		echo "echo \":EXPLAIN_ANALYZE\" > $sql_dir/$filename"

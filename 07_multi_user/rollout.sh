@@ -8,6 +8,7 @@ SQL_VERSION=$3
 RANDOM_DISTRIBUTION=$4
 MULTI_USER_COUNT=$5
 SINGLE_USER_ITERATIONS=$6
+AIPLAN=${AIPLANNER:=no}
 
 if [[ "$GEN_DATA_SCALE" == "" || "$EXPLAIN_ANALYZE" == "" || "$SQL_VERSION" == "" || "$RANDOM_DISTRIBUTION" == "" || "$MULTI_USER_COUNT" == "" || "$SINGLE_USER_ITERATIONS" == "" ]]; then
         echo "You must provide the scale as a parameter in terms of Gigabytes, true/false to run queries with EXPLAIN ANALYZE option, the SQL_VERSION, and true/false to use random distrbution."
@@ -90,7 +91,7 @@ if [ "$file_count" -ne "$MULTI_USER_COUNT" ]; then
 	for x in $(seq 1 $MULTI_USER_COUNT); do
 		session_log=$PWD/../log/testing_session_$x.log
 		echo "$PWD/test.sh $GEN_DATA_SCALE $x $SQL_VERSION $EXPLAIN_ANALYZE"
-		$PWD/test.sh $GEN_DATA_SCALE $x $SQL_VERSION $EXPLAIN_ANALYZE > $session_log 2>&1 < $session_log &
+		AIPLANNER=$AIPLAN $PWD/test.sh $GEN_DATA_SCALE $x $SQL_VERSION $EXPLAIN_ANALYZE > $session_log 2>&1 < $session_log &
 	done
 
 	sleep 60
