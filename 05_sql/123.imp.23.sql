@@ -114,7 +114,7 @@ where t1.ssales > t2.c1
 --from
 -- max_store_sales)
 )
- select  sum(sales),pg_sleep(5000)
+ select  sum(sales)
  from ((select cs_quantity*cs_list_price sales
        from catalog_sales
            ,date_dim 
